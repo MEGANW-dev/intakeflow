@@ -14,47 +14,30 @@ DONE WHEN: a public vercel.app URL loads a page with a shadcn Button,
 verified in an InPrivate window on my phone over cellular data.
 
 ## T4 — Activate all five accountability layers
-DONE WHEN: Beeminder goal live with money attached, witness replied "yes" in
-writing, build log post #1 public, meetup RSVP confirmed, Build Windows user
-account created.
+DONE WHEN: writing, build log post #1 public, meetup RSVP confirmed
 
 ## BLOCKERS (90-minute rule — log and move on)
+
+
+
+# Day 2 — TypeScript Fluency By Building
+
+## T1 — Data fixture + typed shape
+DONE WHEN: data/leads.json has 10 leads and scripts/lead-scorer.ts defines
+Lead, Urgency, and Industry types with no compiler errors.
+
+## T2 — Scoring pipeline that runs
+DONE WHEN: `pnpm tsx scripts/lead-scorer.ts` prints all 10 leads scored,
+tiered, and sorted highest score first.
+
+## T3 — The four hard concepts
+DONE WHEN: the script uses a discriminated union for Tier, a type guard,
+`satisfies` on the config, and a Result<T> return type instead of throwing.
+`pnpm tsc --noEmit` passes with zero errors.
+
+## T4 — LEARNED.md
+DONE WHEN: 10 entries, each 3 sentences: what it is, why it exists, where it
+lands in IntakeFlow.
+
+## BLOCKERS (90-minute rule)
 -
-
-# DAY 2 — Four Atomic Tasks
-
-Day 2 = Tue Sep 8, 2026
-Deliverable: a working typed lead-scorer script + LEARNED.md with 10 entries
-Gate: pnpm tsx scripts/lead-scorer.ts prints a sorted, tiered table · tsc --noEmit shows zero errors · LEARNED.md has 10 entries
-
----
-
-## TASK 1 — Scaffold the files (10 min)
-
-Done when: scripts/lead-scorer.ts, scripts/leads.json, and LEARNED.md exist, and `pnpm tsx scripts/lead-scorer.ts` runs without a "file not found" error (printing nothing is fine at this point).
-
----
-
-## TASK 2 — Define the Lead type and write the data (30 min)
-
-
-Done when: scoreLead returns a Tier for each lead, and Cursor shows no red squiggles under anything.
-
----
-
-## TASK 3 — Read the file, score, and print the table (45 min)
-
-
-Done when: pnpm tsx scripts/lead-scorer.ts prints a sorted, tiered table, and LEARNED.md has at least 5 entries.
-
----
-
-## TASK 4 — Pass the gate and commit (15 min)
-
-
-Done when: both gate commands pass clean, LEARNED.md has 10 entries, and the commit is pushed to GitHub.
-
----
-
-
-pnpm tsx scripts/lead-scorer.ts prints a sorted, tiered table · pnpm tsc --noEmit shows zero errors · LEARNED.md has 10 entries

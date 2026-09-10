@@ -41,3 +41,13 @@ lands in IntakeFlow.
 
 ## BLOCKERS (90-minute rule)
 -
+## Day 3 — IntakeFlow Data Layer Delivery Gates (PLACEHOLDER)
+
+## T1  — Structural Table Architecture:** 
+  All 6 required relational Postgres database tables are successfully initialized, mapped, and actively visible inside your hosted Supabase cloud dashboard panel.
+
+## T2  — Row Level Security Verification:** 
+  Executing a database table select script query passing your public `anon` key returns exactly `0 rows` (proving RLS rules are active and blocking unauthorized public extraction), while executing the exact same script query passing your server-side `service-role` key bypasses RLS filters completely to return all rows.
+  
+## T3  — Production Variable Rendering:** 
+  Your live, deployed application production URL webpage loads up securely over HTTPS and successfully fetches, parses, and visually renders your seeded database organization name on the screen.

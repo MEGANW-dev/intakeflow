@@ -25,3 +25,13 @@ To resolve the bottleneck and restore standard command workflows, the 90-minute 
 - `pnpm -v` successfully prints clean white text output: `11.25.0`
 - `pnpm tsx scripts/lead-scorer.ts` executes flawlessly, bypassing error loops and returning a clean terminal prompt.
 - **Status:** Closed / Resolved.
+
+## Day 3 — RLS policies deliberately deferred to Day 11
+Tables have RLS ENABLED with zero policies = Postgres default-deny.
+This is the most restrictive state, not an unfinished one.
+Policies need auth.uid() + seeded memberships, which arrive Day 11.
+All server-side access today uses the secret key, which bypasses RLS by design.
+## 
+Day 11 must: add auth, seed memberships, write select/update policies
+for leads/artifacts/workflow_runs/lead_events, then run the two-org
+isolation test from spec section 4 and screenshot it.

@@ -40,14 +40,35 @@ DONE WHEN: 10 entries, each 3 sentences: what it is, why it exists, where it
 lands in IntakeFlow.
 
 ## BLOCKERS (90-minute rule)
--
-## Day 3 — IntakeFlow Data Layer Delivery Gates (PLACEHOLDER)
 
-## T1  — Structural Table Architecture:** 
-  All 6 required relational Postgres database tables are successfully initialized, mapped, and actively visible inside your hosted Supabase cloud dashboard panel.
+# Days 3 & 4 (compressed) — Data Layer + Intake Form
+Target: Day 5 Unblock Path only. 4h15m of GATE work.
 
-## T2  — Row Level Security Verification:** 
-  Executing a database table select script query passing your public `anon` key returns exactly `0 rows` (proving RLS rules are active and blocking unauthorized public extraction), while executing the exact same script query passing your server-side `service-role` key bypasses RLS filters completely to return all rows.
-  
-## T3  — Production Variable Rendering:** 
-  Your live, deployed application production URL webpage loads up securely over HTTPS and successfully fetches, parses, and visually renders your seeded database organization name on the screen.
+## T1 — Six tables live in production Postgres  [Day 3 GATE]
+DONE WHEN: Supabase table editor shows orgs, memberships, leads,
+artifacts, workflow_runs, lead_events. Migration saved as a
+numbered .sql file in supabase/migrations/ and committed.
+
+## T2 — RLS on, verified, admin client wired  [Day 3 GATE]
+DONE WHEN: a select on leads with the PUBLISHABLE key returns 0 rows
+and the same select with the SECRET key returns all rows.
+lib/supabase/admin.ts exists and imports "server-only".
+
+## T3 — Form renders at /f/demo-law from real org data  [Day 4 GATE]
+DONE WHEN: localhost:3000/f/demo-law shows the seeded org name and a
+service dropdown populated from org.settings.services.
+localhost:3000/f/nope returns a 404.
+
+## T4 — A real lead row from my phone  [Day 4 GATE]
+DONE WHEN: I submit the form from my phone on cellular data and see a
+new row in the production leads table with status='received'.
+
+## DEFERRED TO DAY 6 (Saturday Finish Debt)
+
+- RLS policies + current_user_orgs() helper  (needs auth = Day 11)
+- 3-step wizard UX, progress bar, per-step validation
+- IP rate limiting, disposable-email deny-list
+- memberships seeding, shadcn Form + react-hook-form
+- Day 2 Stage 2 + LEARNED.md  (moved to Day 5 warm-up)
+
+## BLOCKERS (90-minute rule)

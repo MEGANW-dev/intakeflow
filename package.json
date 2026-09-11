@@ -1,5 +1,7 @@
 {
-  "engines": { "node": ">=24 <25" },
+  "engines": {
+    "node": ">=24 <25"
+  },
   "name": "intakeflow",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +13,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
+    "@supabase/supabase-js": "^2.116.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.2.4",
     "lucide-react": "^1.40.0",

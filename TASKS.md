@@ -72,3 +72,25 @@ new row in the production leads table with status='received'.
 - Day 2 Stage 2 + LEARNED.md  (moved to Day 5 warm-up)
 
 ## BLOCKERS (90-minute rule)
+# Day 5 — The AI Pipeline (the day that makes me billable)
+
+## Ready from Day 3-4
+- leads table with fit_score/tier/urgency/budget_band/ai_* columns, all nullable
+- workflow_runs table for cost + latency logging
+- A real lead row, status='received', submitted from my phone
+- lib/schemas/lead.ts, lib/supabase/admin.ts
+- tierFor() in scripts/lead-scorer.ts from Day 2 <- reuse this, do not rewrite
+
+## Warm-up 7:20-8:05 (Day 2 debt, in real code this time)
+- Day 2 Stage 2: discriminated unions, type guards, Result<T>
+- Apply Result<T> to classifyLead()'s return type instead of a fixture
+- Day 2 LEARNED.md entries
+
+## T1 — OpenAI structured output returns a valid verdict
+## T2 — Pipeline writes fit_score/tier/ai_summary back to the lead
+## T3 — workflow_runs logs tokens, cost_usd, duration_ms per call
+## T4 — Trigger it from the server action so a new lead classifies itself
+
+## Read first, 20 min max
+- intakeflow-spec.md section 6.1 (the classification call + prompt)
+- intakeflow-spec.md section 6.4 (cost model — know this cold before pricing)

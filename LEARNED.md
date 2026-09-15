@@ -6,9 +6,30 @@ Next.js dynamic routes use square brackets in folder names: app/f/[orgSlug]. In 
 ## L2
 Config-over-code" is an architectural pattern where you store dynamic system behaviors and client settings as raw data inside the database rather than hardcoding them into your application logic
 
-## L3 
-- Think of params as a locked safe handed to your page, and orgSlug is the company name locked inside it. In old versions of Next.js, the safe arrived wide open so you could just grab params.orgSlug instantly. 
-- In Next.js 15, the safe arrives locked, and you must use the await keyword as your key to unlock it (await params) or your app will crash with an undefined error. Older tutorials and Cursor will wrong-foot you by telling you to skip the key because they don't know the safe is locked now. 
-- Next.js made this change for raw speed, allowing the website to load your background design instantly while unlocking the URL variables a millisecond later in the background.
+## L3 PowerShell brackets need -LiteralPath
+Next.js dynamic routes are folders like app/f/[orgSlug]. PowerShell treats
+[ and ] as wildcards, so -Path silently misbehaves. Any bracketed path
+needs -LiteralPath. Only affects PowerShell's own path cmdlets — git,
+pnpm, and Cursor are fine.
 
-- Every dynamic page you write for the rest of this project awaits its params.
+## L4 NEXT_PUBLIC_ is a security boundary, not a naming style
+Next inlines NEXT_PUBLIC_* into the browser bundle. SUPABASE_SECRET_KEY
+has no prefix on purpose. Adding one would publish root database access.
+No bug's correct fix is adding that prefix.
+
+## L5 RLS enabled with zero policies = default deny
+Postgres requires a matching policy to permit row access. No policies
+means nothing is visible to the public key. This is the MOST locked-down
+state, not an unfinished one. The secret key bypasses RLS by design,
+which is how server-side writes work.
+
+## L6 params is a Promise in Next.js 15
+params: Promise<{ orgSlug: string }> and const { orgSlug } = await params.
+Older tutorials (and Cursor) suggest the sync object; that yields
+undefined. Async so Next can render the shell before params resolve.
+
+## L7 Everything from FormData is a string
+Unchecked checkboxes are absent entirely; checked ones send "on".
+z.literal(true) rejects both. Coerce at the boundary (consent === "on"),
+then work with real types inside. Same discipline as Result<T>: parse
+once at the edge, trust the types after.

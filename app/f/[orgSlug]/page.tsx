@@ -18,13 +18,21 @@ export default async function IntakePage ({
 }) {
     const { orgSlug } = await params;
     
-    const { data:org } = await supabaseAdmin
+    const { data: org, error: orgError} = await supabaseAdmin
         .from("orgs")
         .select("id, slug, name, settings")
         .eq("slug", orgSlug)
         .maybeSingle();
 
-    if (!org) notFound();
+        if (orgError) {
+            console.error("[intake] org lookup failed for", orgSlug, orgError);
+            throw new Error(`Org lookup failed: ${orgError.message}`);
+          }
+          
+          if (!org) {
+            console.warn("[intake] no org with slug", orgSlug);
+            notFound();   // genuinely absent → a real 404
+          }
 
     const settings = (org.settings ?? {}) as OrgSettings;
     const services = settings.services?.length

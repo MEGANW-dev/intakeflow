@@ -33,3 +33,6 @@ Unchecked checkboxes are absent entirely; checked ones send "on".
 z.literal(true) rejects both. Coerce at the boundary (consent === "on"),
 then work with real types inside. Same discipline as Result<T>: parse
 once at the edge, trust the types after.
+
+## L8 - My first 404 after deployment and the fix 
+The bug was collapsing two different failures into one indistinguishable outcome. "This org doesn't exist" and "I couldn't reach the database" need different responses, and by ignoring error I made them identical — which made the problem invisible.

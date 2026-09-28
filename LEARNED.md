@@ -41,3 +41,13 @@ Model spend is about two dollars a month. The retainer is for the system, the mo
 
 ## L9 - Database failure lesson
 when you see fetch failed, Internal Server Error, something went wrong, or any other vague message, scroll up in the terminal and look for Caused by, cause:, or the first line that names a specific system like a hostname, a file path, an error code, or a port. That's where the answer is almost every time.
+
+## Rubric calibration: classify.v1.0.0 (Sept 26)
+
+| Fixture | My score | Model | Agree? | Why we differ |
+|----------|---------|-------|--------|---------------|
+| 1 furnace emergency | 9-10 | 9/10  |  Yes  |   |
+| 2 out-of-area commercial | 0 |  1/10 |  Yes  |   |
+| 3 heat pump research | 5-6 | 4/10 | Yes  |   |
+| 4 vague AC | 4-5 |  6/10 | No | Vauge but has an emergency request to call asap, should not have landed in nuture |
+| 5 SEO spam | 0 | 4/10 | No  | This is an intentional scam message and it scored nuture, this should have received an automatic disqualification  |

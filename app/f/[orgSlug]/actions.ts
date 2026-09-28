@@ -1,7 +1,9 @@
 "use server";
-
+import { after } from "next/server";
 import { leadInputSchema } from "../../../lib/schemas/lead";
 import { supabaseAdmin } from "../../../lib/supabase/admin";
+import { runPipeline } from "../../../lib/pipeline/run";
+
 
 export type SubmitState = {
   ok: boolean;
@@ -54,7 +56,9 @@ export async function submitLead(
   }
 
   // 5. Insert.
-  const { error: insertError } = await supabaseAdmin.from("leads").insert({
+  const { data: inserted, error: insertError } = await supabaseAdmin
+  .from("leads")
+  .insert({
     org_id:          org.id,
     full_name:       d.fullName,
     email:           d.email,
@@ -67,15 +71,25 @@ export async function submitLead(
     source:          "web_form",
     raw_payload:     { foundVia: d.foundVia || null, elapsedMs },
     status:          "received",
-  });
+  })
+  .select("id")
+  .single();
 
-  if (insertError) {
+  if (insertError || !inserted) {
     console.error("submitLead: insert failed", insertError);
     return {
       ok: false,
       message: "Something went wrong on our end. Please email us directly.",
     };
   }
+
+ 
+    try{
+      await runPipeline(inserted.id);
+    } catch (e) {
+      console.error("[pipeline] unhandled error", inserted.id, e)
+    }
+  
 
   return {
     ok: true,

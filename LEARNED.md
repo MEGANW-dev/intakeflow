@@ -34,5 +34,10 @@ z.literal(true) rejects both. Coerce at the boundary (consent === "on"),
 then work with real types inside. Same discipline as Result<T>: parse
 once at the edge, trust the types after.
 
-## L8 - My first 404 after deployment and the fix 
-The bug was collapsing two different failures into one indistinguishable outcome. "This org doesn't exist" and "I couldn't reach the database" need different responses, and by ignoring error I made them identical — which made the problem invisible.
+## L8 - *IMPORTANT* Model Cost 
+Why gpt-4o-mini and not the best model available. Per the spec's cost model, classification runs about $0.0004 per lead — roughly $1.50/month at 100 leads against a $400/month retainer.
+
+Model spend is about two dollars a month. The retainer is for the system, the monitoring, and the changes.
+
+## L9 - Database failure lesson
+when you see fetch failed, Internal Server Error, something went wrong, or any other vague message, scroll up in the terminal and look for Caused by, cause:, or the first line that names a specific system like a hostname, a file path, an error code, or a port. That's where the answer is almost every time.
